@@ -6,5 +6,10 @@ pipeline {
                 sh 'python --version'
             }
         }
+		stage('test') {
+            steps {
+                echo 'Running test suites...'
+            }
+        }
     }
 }
