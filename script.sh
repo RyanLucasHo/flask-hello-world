@@ -1,2 +1,4 @@
 #!/bin/bash
-sleep 50
+number=shuf -i 59-60 -n1
+echo $number
+sleep $number
