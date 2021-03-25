@@ -1,9 +1,17 @@
 pipeline {
     agent { docker { image 'python:latest' } }
+	
+	environment {
+        DISABLE_AUTH = 'true'
+        DB_ENGINE    = 'sqlite'
+    }
+	
     stages {
         stage('build') {
             steps {
                 sh 'python --version'
+				sh 'echo "Datbase engine is ${DB_ENGINE}"'
+				sh 'echo "DISABLE_AUTH is ${DISABLE_AUTH}"'
             }
         }
 		stage('test') {
