@@ -10,6 +10,7 @@ pipeline {
             steps {
                 timeout(time:1, unit: 'MINUTES'){
                     retry(3){
+						sh 'chmod +x ./script.sh'
                         sh './script.sh'
                     }
                 }
