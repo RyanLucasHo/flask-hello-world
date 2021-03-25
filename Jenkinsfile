@@ -15,9 +15,16 @@ pipeline {
             }
         }
 		stage('test') {
+			environment {
+				DISABLE_AUTH = 'false'
+				DB_ENGINE    = 'mongo'
+			}
             steps {
                 timeout(time:1, unit: 'MINUTES'){
                     retry(3){
+						sh 'echo "Datbase engine is ${DB_ENGINE}"'
+						sh 'echo "DISABLE_AUTH is ${DISABLE_AUTH}"'
+						
 						sh 'chmod +x ./script.sh'
                         sh './script.sh'
                     }
