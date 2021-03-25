@@ -8,7 +8,10 @@ pipeline {
         }
 		stage('test') {
             steps {
-                echo 'Running test suites...'
+                sh 'echo "Running test suites..."'
+                sh 'echo "Hello World"'
+                sh 'pwd'
+                sh 'ls -lah'
             }
         }
     }
