@@ -35,7 +35,7 @@ pipeline {
 	post {
 		always {
 			echo 'This will always run'
-			archiveArtifacts artifacts: 'script.sh', fingerprint: true
+			archiveArtifacts artifacts: 'script.sh, hello.py', fingerprint: true
 			publishHTML ([
                     allowMissing: false,
                     alwaysLinkToLastBuild: false,
