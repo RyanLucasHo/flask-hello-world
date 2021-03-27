@@ -7,14 +7,14 @@ pipeline {
     }
 	
     stages {
-        stage('build') {
+        stage('Build') {
             steps {
                 sh 'python --version'
 				sh 'echo "Datbase engine is ${DB_ENGINE}"'
 				sh 'echo "DISABLE_AUTH is ${DISABLE_AUTH}"'
             }
         }
-		stage('test') {
+		stage('Test') {
 			environment {
 				DISABLE_AUTH = 'false'
 				DB_ENGINE    = 'mongo'
@@ -32,6 +32,16 @@ pipeline {
             }
         }
     }
+	stage('Manual Review') {
+		steps {
+			input "Does the staging environment look ok?"
+		}
+	}
+	stage('Deploy') {
+		steps {
+			sh 'echo "Deploying ...."'
+		}
+	}
 	post {
 		always {
 			echo 'This will always run'
@@ -44,6 +54,7 @@ pipeline {
                     reportFiles: 'index.html',
                     reportName: "RCov Report"
 			])
+			deleteDir()
 		}
 		success {
 			echo 'This will run only if successful'
