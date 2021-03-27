@@ -35,6 +35,14 @@ pipeline {
 	post {
 		always {
 			echo 'This will always run'
+			publishHTML ([
+                    allowMissing: false,
+                    alwaysLinkToLastBuild: false,
+                    keepAll: true,
+                    reportDir: 'coverage',
+                    reportFiles: 'index.html',
+                    reportName: "RCov Report"
+			])
 		}
 		success {
 			echo 'This will run only if successful'
